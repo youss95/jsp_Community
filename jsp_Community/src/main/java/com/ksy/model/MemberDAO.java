@@ -21,9 +21,7 @@ public class MemberDAO {
 			Context initctx = new InitialContext();
 			Context envctx = (Context) initctx.lookup("java:comp/env");
 			DataSource ds = (DataSource) envctx.lookup("jdbc/pool");
-			con = ds.getConnection();
-			
-			
+			con = ds.getConnection();			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
