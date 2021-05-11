@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class JoinReqDto {
 private String username;
 private String password;
-private String emai;
+private String email;
 private String address;
 
 }

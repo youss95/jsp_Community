@@ -1,16 +1,28 @@
 package com.ksy.blog.service;
 
 import com.ksy.blog.domain.user.User;
+import com.ksy.blog.domain.user.UserDao;
 import com.ksy.blog.domain.user.dto.JoinReqDto;
 import com.ksy.blog.domain.user.dto.LoginReqDto;
 import com.ksy.blog.domain.user.dto.UpdateReqDto;
 
 public class UserService {
+	
+	//모든 메소들에 userDao를 만드는 대신
+	private UserDao userDao;
+	public UserService( ) {
+		userDao = new UserDao();
+	}
+	
+	
 //회원가입 수정 로그인 로그아웃 아이디 중복체크 
 	//null값 체크 필요해서 dto 로 받는다
+	//joinform -> usercontroller -> userservice -> userdao ->usercontroller
 	public int 회원가입(JoinReqDto dto) {
-		
-		return -1;
+	
+	int result =  userDao.save(dto);
+		System.out.println(result);
+		return result;
 		
 	}
 	//select * from user where username=? and password=?

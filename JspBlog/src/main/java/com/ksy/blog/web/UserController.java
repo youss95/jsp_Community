@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ksy.blog.domain.user.dto.JoinReqDto;
 import com.ksy.blog.domain.user.dto.LoginReqDto;
 import com.ksy.blog.service.UserService;
+import com.ksy.blog.util.Script;
 
 
 @WebServlet("/user")
@@ -31,7 +32,7 @@ public class UserController extends HttpServlet {
 		
 		UserService userService = new UserService();
 		
-		if(cmd.equals("loginForm")) {
+		if(cmd.equals("LoginForm")) {
 			
 			response.sendRedirect("user/LoginForm.jsp");
 		}else if(cmd.equals("login")) {
@@ -43,8 +44,8 @@ public class UserController extends HttpServlet {
 			dto.setPassword(password);
 			userService.로그인(dto);
 			
-		} else if(cmd.equals("joinForm.jsp")) {
-		response.sendRedirect("user/joinForm.jsp");
+		} else if(cmd.equals("JoinForm")) {
+		response.sendRedirect("user/JoinForm.jsp");
 	} else if(cmd.equals("join")) {
 		//서비스
 		String username= request.getParameter("username");
@@ -54,9 +55,17 @@ public class UserController extends HttpServlet {
 		JoinReqDto dto = new JoinReqDto();
 		dto.setUsername(username);
 		dto.setPassword(password);
-		dto.setEmai(email);
+		dto.setEmail(email);
 		dto.setAddress(address);
-		userService.회원가입(dto);
+	
+		System.out.println(dto);
+		int result = userService.회원가입(dto);
+		System.out.println("con"+result);
+		if(result == 1) {
+			response.sendRedirect("index.jsp");
+		} else {
+			Script.back(response, "회원가입실패");
+		}
 	}
 	
 	}

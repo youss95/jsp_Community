@@ -22,6 +22,7 @@ public class CharConfig implements Filter{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;");
 		
+		
 		String username = request.getParameter("username");
 		System.out.println("username:"+username);
 		
