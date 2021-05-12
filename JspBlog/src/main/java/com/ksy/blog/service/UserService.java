@@ -40,9 +40,10 @@ public class UserService {
 //	public void 로그아웃() {	
 //	}
 	
-	public int 아이디중복체크(String username) {
+	public int 유저네임중복체크(String username) {
+		int result = userDao.findByUsername(username);
 		
-		return -1;
+		return result;
 	}
 	
 }

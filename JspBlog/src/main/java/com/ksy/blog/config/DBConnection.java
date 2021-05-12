@@ -2,6 +2,7 @@ package com.ksy.blog.config;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -31,6 +32,16 @@ public class DBConnection {
 		try {
 			con.close();
 			pstmt.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+	}
+	
+	public static void close(Connection con, PreparedStatement pstmt,ResultSet rs) {
+		try {
+			con.close();
+			pstmt.close();
+			rs.close();
 			}catch(Exception e) {
 				e.printStackTrace();
 			}

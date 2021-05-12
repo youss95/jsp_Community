@@ -1,6 +1,8 @@
 package com.ksy.blog.web;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,7 +68,21 @@ public class UserController extends HttpServlet {
 		} else {
 			Script.back(response, "회원가입실패");
 		}
+	} else if(cmd.equals("usernameCheck")) {
+		//dataType: text로 넘어 왔기때문에 buffer로 읽는다
+		BufferedReader br = request.getReader();  //넘어온 text읽기
+		String username = br.readLine(); 
+		System.out.println(username);
+		int result = userService.유저네임중복체크(username);  //db에 던지기
+	PrintWriter out = response.getWriter();
+		if(result == 1) {
+			out.print("ok");
+		} else {
+			out.print("fail");
+		}
+		out.flush();
 	}
+			
 	
 	}
 }
