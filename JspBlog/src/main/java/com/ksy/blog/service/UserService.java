@@ -28,7 +28,7 @@ public class UserService {
 	//select * from user where username=? and password=?
 	public User 로그인(LoginReqDto dto) {
 		
-		return null;
+		return userDao.findByUsernameAndPassword(dto);
 	}
 	
 	public int 회원수정(UpdateReqDto dto) {

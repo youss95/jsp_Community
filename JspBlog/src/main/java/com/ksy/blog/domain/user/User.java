@@ -20,4 +20,14 @@ public class User {
 	private String address;
 	private String userRole;
 	private Date createDate;
+	
+	public User(int id, String username, String email, String address) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.address = address;
+	}
+	
+	
 }

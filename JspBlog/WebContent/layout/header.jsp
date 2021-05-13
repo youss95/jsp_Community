@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,18 +15,38 @@
 <body>
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Blog</a>
+  <a class="navbar-brand" href="/JspBlog/index.jsp">Blog</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
+ 
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
+    <c:if test="${sessionScope.sessionUser!=null }">
+    <li class="nav-item">
+        <a class="nav-link" href="<%=request.getContextPath() %>/board?cmd=WriteForm">글쓰기</a>
+      </li>
+      
       <li class="nav-item">
+     <a class="nav-link" href="<%=request.getContextPath()%>/user?cmd=UpdateForm">회원정보</a>
+      </li>
+      
+      <li class="nav-item">
+     <a class="nav-link" href="<%=request.getContextPath()%>/user?cmd=Logout">로그아웃</a>
+      </li>
+    </c:if>
+    
+   <c:if test="${sessionScope.sessionUser==null }">
+   <li class="nav-item">
         <a class="nav-link" href="<%=request.getContextPath() %>/user?cmd=JoinForm">회원가입</a>
       </li>
+      
       <li class="nav-item">
-        <a class="nav-link" href="<%=request.getContextPath()%>/user?cmd=LoginForm">로그인</a>
+     <a class="nav-link" href="<%=request.getContextPath()%>/user?cmd=LoginForm">로그인</a>
       </li>
+   </c:if>
+    
+      
       
     </ul>
   </div>  
