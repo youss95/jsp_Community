@@ -35,7 +35,7 @@ return -1;
 	public User findByUsernameAndPassword(LoginReqDto dto) {
 		
 		Connection con= DBConnection.getCon();
-		User user = new User();
+		//User user = new User();
 		//session에 담을때는 비밀번호 담지 않는다
 		String sql = "select id,username,email,address from member where username=? and password=?";
 		PreparedStatement pstmt=null;
@@ -46,20 +46,23 @@ return -1;
 			pstmt.setString(2, dto.getPassword());
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				/*
+				
 			User user = User.builder()
 					.id(rs.getInt("id"))
 					.username(rs.getString("username"))
 					.email(rs.getString("email"))
 					.address(rs.getString("address"))
 					.build();
-					*/
+			
+			 return user;
+				/*
 			 int id = rs.getInt("id");
 			 String username = rs.getString("username");
 			 String email = rs.getString("email");
 			 String address = rs.getString("address");
 			 user = new User(id,username,email,address);
 				return user;
+				*/
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

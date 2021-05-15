@@ -22,7 +22,7 @@ public class UrlConfig implements Filter{
 		HttpServletResponse response = (HttpServletResponse) resp;
 		
 		
-		System.out.println("ForbiddenUrl 접근");
+		
 		if(request.getRequestURI().equals("/JspBlog/") || request.getRequestURI().equals("/JspBlog/index.jsp")  ){
 			chain.doFilter(request, response);
 		} else {

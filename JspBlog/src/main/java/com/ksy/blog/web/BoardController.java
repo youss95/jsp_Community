@@ -1,6 +1,7 @@
 package com.ksy.blog.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ksy.blog.domain.board.Board;
 import com.ksy.blog.domain.board.dto.WriteReqDto;
 import com.ksy.blog.domain.user.User;
 import com.ksy.blog.service.BoardService;
@@ -68,6 +70,25 @@ public class BoardController extends HttpServlet {
     		}
     		
     		System.out.println(content);
+    	} else if(cmd.equals("list")) {
+    		int page = Integer.parseInt(request.getParameter("page"));
+    	List<Board> list  =	boardService.글목록(page);
+    	request.setAttribute("list", list);  //sendRedirect 쓰면 request 사라짐
+    	
+    	//계산(전체 데이터수랑 한페이지몇개 - 총 몇페이지 나와야 되는지 계산) 3p 라면 2p가 맥스
+    	//page == 2되는 순간 isEnd = true request.setAttribute("isEnd",true);
+    	
+    	int boardCount = boardService.글개수();
+    	int lastPage =(int) Math.ceil( boardCount/4.0); //마지막 페이지
+    	double currentPercent =(double) (page-1)/(lastPage-1)*100; //현재 페이지의 % 정도
+    	System.out.println(boardCount);
+    	
+    	
+ System.out.println(lastPage);
+ request.setAttribute("currentPercent", currentPercent);
+    	request.setAttribute("lastPage", lastPage);
+    	RequestDispatcher dis = request.getRequestDispatcher("board/list.jsp");
+    	dis.forward(request, response);
     	}
 	}	
 }
