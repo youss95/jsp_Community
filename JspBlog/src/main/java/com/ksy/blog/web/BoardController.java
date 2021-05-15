@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ksy.blog.domain.board.Board;
+import com.ksy.blog.domain.board.dto.DetailRespDto;
 import com.ksy.blog.domain.board.dto.WriteReqDto;
 import com.ksy.blog.domain.user.User;
 import com.ksy.blog.service.BoardService;
@@ -89,6 +90,15 @@ public class BoardController extends HttpServlet {
     	request.setAttribute("lastPage", lastPage);
     	RequestDispatcher dis = request.getRequestDispatcher("board/list.jsp");
     	dis.forward(request, response);
+    	} else if(cmd.equals("detail")) {
+    		int id = Integer.parseInt(request.getParameter("id"));
+        	
+        	DetailRespDto detailList =  boardService.상세보기(id);  //board + user
+        	
+        	request.setAttribute("detailList", detailList);
+        	//System.out.println(detailList);
+        	RequestDispatcher dis = request.getRequestDispatcher("board/detail.jsp");
+        	dis.forward(request, response);
     	}
 	}	
 }

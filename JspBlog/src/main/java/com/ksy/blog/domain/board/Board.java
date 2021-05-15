@@ -19,4 +19,10 @@ private String content;
 private int readCount; //조회수
 private Date createDate;
 	
+public String getTitle() {
+	return title.replaceAll("<","&lt;").replaceAll(">","&gt;");
+}
+
+
+
 }

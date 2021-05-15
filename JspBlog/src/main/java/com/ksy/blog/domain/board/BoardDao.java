@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ksy.blog.config.DBConnection;
+import com.ksy.blog.domain.board.dto.DetailRespDto;
 import com.ksy.blog.domain.board.dto.WriteReqDto;
 import com.ksy.blog.domain.user.dto.JoinReqDto;
 
@@ -34,6 +35,7 @@ public class BoardDao {
 return -1;
 	}
 	
+	//게시글 가져오기
 	public List<Board> showList(int page){
 		Connection con = DBConnection.getCon();
 		List<Board> list = new ArrayList<>();
@@ -74,6 +76,41 @@ return -1;
 		return null;
 		
 	}
+	
+	//상세글 보기 - 조인된 dto에 담기
+	public DetailRespDto getDetail(int id){
+		Connection con = DBConnection.getCon();
+		
+		String sql = "select b.id,b.title,b.readCount,b.content, m.username \r\n"
+				+ "from board b inner join member m \r\n"
+				+ "on b.userId = m.id\r\n"
+				+ "where b.id = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				DetailRespDto dto = new DetailRespDto();
+				dto.setId(rs.getInt("id"));
+				dto.setTitle(rs.getString("title"));
+				dto.setReadCount(rs.getInt("readCount"));
+				dto.setContent(rs.getString("content"));
+				dto.setUsername(rs.getString("username"));
+				return dto;	
+			}
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(con, pstmt, rs);
+		}
+		return null;
+	}
+	
+	
+	
+	
+	
 	
 	public int getCount() {
 		Connection con = DBConnection.getCon();

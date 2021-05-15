@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ksy.blog.domain.board.Board;
 import com.ksy.blog.domain.board.BoardDao;
+import com.ksy.blog.domain.board.dto.DetailRespDto;
 import com.ksy.blog.domain.board.dto.WriteReqDto;
 
 public class BoardService {
@@ -29,6 +30,11 @@ public List<Board> 글목록(int page){
 public int 글개수() {
 	
 	return boardDao.getCount();
+}
+
+public DetailRespDto 상세보기(int id){
+	//상세보기 할때 조회수 +1
+	return boardDao.getDetail(id);
 }
 
 }
