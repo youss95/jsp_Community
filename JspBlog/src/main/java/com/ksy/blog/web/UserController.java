@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,8 +38,10 @@ public class UserController extends HttpServlet {
 		UserService userService = new UserService();
 		
 		if(cmd.equals("LoginForm")) {
+			//response.sendRedirect("/JspBlog/user/LoginForm.jsp"); 필터를 탄다
+			RequestDispatcher dis = request.getRequestDispatcher("user/LoginForm.jsp");
+			dis.forward(request, response); //톰캣이 생성한 request, response를 재사용
 			
-			response.sendRedirect("user/LoginForm.jsp");
 		}else if(cmd.equals("login")) {
 			//서비스
 			String username= request.getParameter("username");
@@ -56,7 +59,9 @@ public class UserController extends HttpServlet {
 				Script.back(response, "로그인에 실패하였습니다.");
 			}
 		} else if(cmd.equals("JoinForm")) {
-		response.sendRedirect("user/JoinForm.jsp");
+		//response.sendRedirect("user/JoinForm.jsp");
+			RequestDispatcher dis = request.getRequestDispatcher("user/JoinForm.jsp");
+			dis.forward(request, response); //톰캣이 생성한 request, response를 재사용
 	} else if(cmd.equals("join")) {
 		//서비스
 		String username= request.getParameter("username");
@@ -96,7 +101,7 @@ public class UserController extends HttpServlet {
 		session.invalidate();
 		response.sendRedirect("index.jsp");
 		
-	}
+	} 
 			
 	
 	}

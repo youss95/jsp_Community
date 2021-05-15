@@ -1,11 +1,19 @@
 package com.ksy.blog.web;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.ksy.blog.domain.board.dto.WriteReqDto;
+import com.ksy.blog.domain.user.User;
+import com.ksy.blog.service.BoardService;
+import com.ksy.blog.util.Script;
 
 
 @WebServlet("/board")
@@ -20,7 +28,46 @@ public class BoardController extends HttpServlet {
 	}
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	}
-	
-	
+		String cmd= request.getParameter("cmd");
+		BoardService boardService = new BoardService();    //boardService 생성자를 호출함으로서 dao 새로 생성 안해도됨
+		HttpSession session = request.getSession();
+		 if(cmd.equals("WriteForm")) {
+			 //아무나 글쓰는 것이 아닌 로그인 한 사람만 글 쓸수 있어야 한다. 인증이 필요
+			 //직접 세션 확인 필요
+			//하지만 만약 조건문을 통한 접근이 아닌 강제로 url을 통해 가는 상황 이라면?
+			User principal = (User) session.getAttribute("sessionUser");   //principal이 있다면 로그인 한 것
+			if(principal != null) {
+				//response.sendRedirect("board/WriteForm.jsp"); 
+				//로그인 되어있다면
+				RequestDispatcher dis = request.getRequestDispatcher("board/WriteForm.jsp");
+				dis.forward(request, response); //톰캣이 생성한 request, response를 재사용
+			} else {
+				//response.sendRedirect("/user/LoginForm.jsp");     
+				//로그인 되어있지 않다면
+				RequestDispatcher dis = request.getRequestDispatcher("user/LoginForm.jsp");
+				dis.forward(request, response); //톰캣이 생성한 request, response를 재사용
+			}
+			//dto 만들어서 파라미터로 던져주는 습관 필요
+    	} else if(cmd.equals("save")) {
+    		//User principal = (User)session.getAttribute("sessionUser");
+    		int userId = Integer.parseInt(request.getParameter("userId"));
+    		String title = request.getParameter("title");
+    		String content = request.getParameter("content");
+    		//int userId = principal.getId(); // 글쓰기에 파라미터로 던져줘도 되지만 애초에 글쓰기 폼에서 히든으로 유저에게 받을수도 있다.
+    		//히든값을 너어주면 내 페이지로 부트 들어왔는지 강제로 들어왔는지 체크가 가능 -> 더 안전, 심플
+    		WriteReqDto dto = new WriteReqDto();
+    		dto.setUserId(userId);
+    		dto.setContent(content);
+    		dto.setTitle(title);
+    		int result = boardService.글쓰기(dto);
+    		if(result==1) {
+    		
+    			Script.writeSuccess(response, "글쓰기 성공");  //글쓰기 성공 alert띄우고 index.jsp로 가기
+    		} else {
+    			Script.back(response, "글쓰기 실패");
+    		}
+    		
+    		System.out.println(content);
+    	}
+	}	
 }

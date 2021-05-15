@@ -1,6 +1,7 @@
 package com.ksy.blog.config;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -10,8 +11,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-@WebFilter("/*")
-public class CharConfig implements Filter{
+
+@WebFilter("*.jsp")
+public class UrlConfig implements Filter{
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
@@ -19,14 +21,17 @@ public class CharConfig implements Filter{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;");
-		response.setCharacterEncoding("UTF-8");
 		
-		String username = request.getParameter("username");
-		System.out.println("username:"+username);
+		System.out.println("ForbiddenUrl 접근");
+		if(request.getRequestURI().equals("/JspBlog/") || request.getRequestURI().equals("/JspBlog/index.jsp")  ){
+			chain.doFilter(request, response);
+		} else {
 		
-		chain.doFilter(request, response);
+			
+			PrintWriter out = response.getWriter();
+			out.print("잘못된 접근");
+			out.flush();
+		}
 		
 	}
 	

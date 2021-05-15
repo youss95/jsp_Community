@@ -22,4 +22,18 @@ public class Script {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void writeSuccess(HttpServletResponse response, String msg) {
+		response.setCharacterEncoding("UTF-8");
+		try {
+			PrintWriter out = response.getWriter();
+			out.print("<script>");
+			out.print("alert('" + msg + "');");
+			out.print("window.location.href='index.jsp';");
+			out.print("</script>");
+			out.flush();
+		}  catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
