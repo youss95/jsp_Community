@@ -94,11 +94,14 @@ public class BoardController extends HttpServlet {
     		int id = Integer.parseInt(request.getParameter("id"));
         	
         	DetailRespDto detailList =  boardService.상세보기(id);  //board + user
-        	
+        	if(detailList == null) {
+        		Script.back(response, "상세보기 실패");
+        	} else {
         	request.setAttribute("detailList", detailList);
         	//System.out.println(detailList);
         	RequestDispatcher dis = request.getRequestDispatcher("board/detail.jsp");
         	dis.forward(request, response);
+    	   }
     	}
 	}	
 }

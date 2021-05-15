@@ -108,10 +108,25 @@ return -1;
 	}
 	
 	
+	//조회수
+	public int updateCount(int id) {
+		Connection con = DBConnection.getCon();
+		String sql ="update board set readCount=readCount+1 where id=? ";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			int result = pstmt.executeUpdate();
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(con, pstmt);
+		}
+		return -1;
+	}
 	
 	
-	
-	
+	//게시물 개수
 	public int getCount() {
 		Connection con = DBConnection.getCon();
 		String sql = "select count(*) from board";

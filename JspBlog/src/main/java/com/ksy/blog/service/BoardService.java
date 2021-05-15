@@ -31,10 +31,15 @@ public int 글개수() {
 	
 	return boardDao.getCount();
 }
-
+//두가지 로직
 public DetailRespDto 상세보기(int id){
 	//상세보기 할때 조회수 +1
-	return boardDao.getDetail(id);
+	int result = boardDao.updateCount(id);
+	if(result == 1) {
+		return boardDao.getDetail(id);
+	}else {
+	return null;
+	}
 }
 
 }
