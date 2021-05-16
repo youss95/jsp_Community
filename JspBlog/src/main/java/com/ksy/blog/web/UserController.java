@@ -49,7 +49,9 @@ public class UserController extends HttpServlet {
 			LoginReqDto dto = new LoginReqDto();
 			dto.setUsername(username);
 			dto.setPassword(password);
+			//System.out.println("username: "+username);
 		User userEntity =	userService.로그인(dto);   //디비로부터 받은것은 Entity
+		//System.out.println(userEntity);
 			//세션객체에 담기
 		if(userEntity!=null) {
 				HttpSession session =request.getSession();

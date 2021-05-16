@@ -1,6 +1,8 @@
 package com.ksy.blog.web;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.ksy.blog.domain.board.Board;
+import com.ksy.blog.domain.board.dto.DeleteReqDto;
+import com.ksy.blog.domain.board.dto.DeleteRespDto;
 import com.ksy.blog.domain.board.dto.DetailRespDto;
 import com.ksy.blog.domain.board.dto.WriteReqDto;
 import com.ksy.blog.domain.user.User;
@@ -54,6 +59,7 @@ public class BoardController extends HttpServlet {
     	} else if(cmd.equals("save")) {
     		//User principal = (User)session.getAttribute("sessionUser");
     		int userId = Integer.parseInt(request.getParameter("userId"));
+    		System.out.println("유저아이디는:"+userId);
     		String title = request.getParameter("title");
     		String content = request.getParameter("content");
     		//int userId = principal.getId(); // 글쓰기에 파라미터로 던져줘도 되지만 애초에 글쓰기 폼에서 히든으로 유저에게 받을수도 있다.
@@ -98,10 +104,36 @@ public class BoardController extends HttpServlet {
         		Script.back(response, "상세보기 실패");
         	} else {
         	request.setAttribute("detailList", detailList);
-        	//System.out.println(detailList);
+        	System.out.println(detailList);
         	RequestDispatcher dis = request.getRequestDispatcher("board/detail.jsp");
         	dis.forward(request, response);
     	   }
+    	}else if(cmd.equals("delete")) {
+    		//json데이터를 읽어와야 한다.
+    		
+    		BufferedReader br = request.getReader();
+    		String data = br.readLine();
+    		//data를 읽기위한 dto 만들고 gson으로 파싱
+    		//json을 자바 오브젝트로 파싱
+    		Gson gson = new Gson();
+    		DeleteReqDto dto = gson.fromJson(data,DeleteReqDto.class);
+    		//디비에서 글 삭제
+    		int result = boardService.글삭제(dto.getBoardId());
+    		//응답할 json 데이터 생성
+    		DeleteRespDto respDto = new DeleteRespDto();
+    		if(result==1) {
+    			respDto.setMsg("ok");
+    			
+    		} else {
+    			respDto.setMsg("fail");
+    		}
+    		String respData = gson.toJson(respDto);
+    		PrintWriter out = response.getWriter();
+    		out.print(respData);
+    		out.flush();
+    		
+    		System.out.println(dto);
+    		System.out.println(data);
     	}
 	}	
 }

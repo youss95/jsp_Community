@@ -42,4 +42,9 @@ public DetailRespDto 상세보기(int id){
 	}
 }
 
+public int 글삭제(int id) {
+	
+	return boardDao.deleteById(id);
+}
+
 }

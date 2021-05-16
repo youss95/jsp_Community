@@ -24,7 +24,7 @@ public class BoardDao {
 		int result=0;
 		try {
 		 pstmt = con.prepareStatement(sql);
-		pstmt.setInt(1, 1);
+		pstmt.setInt(1,dto.getUserId());
 		pstmt.setString(2, dto.getTitle());
 		pstmt.setString(3, dto.getContent());
 		 result = pstmt.executeUpdate();
@@ -81,7 +81,7 @@ return -1;
 	public DetailRespDto getDetail(int id){
 		Connection con = DBConnection.getCon();
 		
-		String sql = "select b.id,b.title,b.readCount,b.content, m.username \r\n"
+		String sql = "select b.id,b.title,b.readCount,b.content,b.userId, m.username \r\n"
 				+ "from board b inner join member m \r\n"
 				+ "on b.userId = m.id\r\n"
 				+ "where b.id = ?";
@@ -95,6 +95,7 @@ return -1;
 				dto.setTitle(rs.getString("title"));
 				dto.setReadCount(rs.getInt("readCount"));
 				dto.setContent(rs.getString("content"));
+				dto.setUserId(rs.getInt("userId"));
 				dto.setUsername(rs.getString("username"));
 				return dto;	
 			}
@@ -142,6 +143,24 @@ return -1;
 		}catch(Exception e) {
 			e.printStackTrace();
 		} finally {
+			DBConnection.close(con, pstmt);
+		}
+		return -1;
+	}
+	
+	//글삭제
+	public int deleteById(int id) {
+		Connection con = DBConnection.getCon();
+		String sql = "delete from board where id=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			int result = pstmt.executeUpdate();
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
 			DBConnection.close(con, pstmt);
 		}
 		return -1;
