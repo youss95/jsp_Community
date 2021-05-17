@@ -35,27 +35,40 @@
 				<div class="panel panel-info">
 					<div class="panel-heading m-2"><b>Comment</b></div>
 					<div class="panel-body">
-					
+					<%-- 
 					<form action="/JspBlog/reply?cmd=save" method="post">
 							<input type="hidden" name="userId" value="${sessionScope.sessionUser.id}" />
-							<input type="hidden" name="boardId" value="${detailList.id}" />
-							<textarea name="content" id="reply__write__form" class="form-control" placeholder="write a comment..." rows="2"></textarea>
+							<input type="hidden" name="boardId" value="${detailList.id}" /> --%>
+							<textarea id="content" id="reply__write__form" class="form-control" placeholder="write a comment..." rows="2"></textarea>
 							<br>
 
-							<button class="btn btn-primary pull-right">댓글쓰기</button>
-						</form>
+							<button onclick="replySave(${sessionScope.sessionUser.id},${detailList.id})" class="btn btn-primary pull-right">댓글쓰기</button>
+					<!-- 	</form> -->
 						<script>
+						function replySave(userId, boardId){
 						
+							
+							var data = {
+									userId: userId,
+									boardId : boardId,
+									content: $("#content").val()
+							}
 						
-						/* function replySave(){
+							
 							$.ajax({
 								type:"post",
 								url:"/JspBlog/reply?cmd=save",
-								data:
+								data:JSON.stringify(data),
+								contentType:"application/json; charset=utf-8",
+								dataType:"json"
 							}).done(function(result){
-								
-							})
-						} */
+								if(result.statusCode==1){
+									$("#reply__list").prepend("<div>"+data.content+"</div>")
+								} else{
+									alert("댓글쓰기 실패");
+								}
+							});
+						}
 						
 						
 						</script>
@@ -64,14 +77,12 @@
 						<!-- 댓글 리스트 시작-->
 						<ul id="reply__list" class="media-list">
 						
-						
-							<!-- 댓글 아이템 -->
-							<li class="media">	
-								<img src="https://bootdey.com/img/Content/user_1.jpg" class="img-circle">		
+						<li id="reply-1" class="media">	
+								
 								<div class="media-body">
-									<strong class="text-primary"></strong>
+									<strong class="text-primary">guest1</strong>
 									<p>
-									${dto.content }
+									댓글...
 									</p>
 								</div>
 								<div class="m-2">
@@ -79,6 +90,9 @@
 								<i onclick="#" class="material-icons ">delete</i>
 								</div>
 							</li>
+						
+							<!-- 댓글 아이템 -->
+							
 					
 						</ul>
 						<!-- 댓글 리스트 끝-->

@@ -36,4 +36,17 @@ public class Script {
 			e.printStackTrace();
 		}
 	}
+	//CommonRespDto : 데이터가 동적 , 내가 원하는거 넣을수 있음
+	public static void responseData(HttpServletResponse response, String jsonData) {
+		PrintWriter out;
+		try {
+		out = response.getWriter();
+		out.print(jsonData);
+			out.flush();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
