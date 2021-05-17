@@ -15,13 +15,16 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.ksy.blog.domain.board.Board;
+import com.ksy.blog.domain.board.dto.CommonRespDto;
 import com.ksy.blog.domain.board.dto.DeleteReqDto;
 import com.ksy.blog.domain.board.dto.DeleteRespDto;
 import com.ksy.blog.domain.board.dto.DetailRespDto;
 import com.ksy.blog.domain.board.dto.UpdateReqDto;
 import com.ksy.blog.domain.board.dto.WriteReqDto;
+import com.ksy.blog.domain.reply.dto.SaveReqDto;
 import com.ksy.blog.domain.user.User;
 import com.ksy.blog.service.BoardService;
+import com.ksy.blog.service.ReplyService;
 import com.ksy.blog.util.Script;
 
 
@@ -99,8 +102,9 @@ public class BoardController extends HttpServlet {
     	dis.forward(request, response);
     	} else if(cmd.equals("detail")) {
     		int id = Integer.parseInt(request.getParameter("id"));
-        	
+        
         	DetailRespDto detailList =  boardService.상세보기(id);  //board + user
+        	
         	if(detailList == null) {
         		Script.back(response, "상세보기 실패");
         	} else {
@@ -112,29 +116,27 @@ public class BoardController extends HttpServlet {
     	}else if(cmd.equals("delete")) {
     		//json데이터를 읽어와야 한다.
     		
-    		BufferedReader br = request.getReader();
-    		String data = br.readLine();
     		//data를 읽기위한 dto 만들고 gson으로 파싱
     		//json을 자바 오브젝트로 파싱
-    		Gson gson = new Gson();
-    		DeleteReqDto dto = gson.fromJson(data,DeleteReqDto.class);
+    		int id = Integer.parseInt(request.getParameter("id"));
+    	
     		//디비에서 글 삭제
-    		int result = boardService.글삭제(dto.getBoardId());
+    		int result = boardService.글삭제(id);
     		//응답할 json 데이터 생성
-    		DeleteRespDto respDto = new DeleteRespDto();
-    		if(result==1) {
-    			respDto.setMsg("ok");
-    			
-    		} else {
-    			respDto.setMsg("fail");
-    		}
-    		String respData = gson.toJson(respDto);
+    		
+    	CommonRespDto<String> commonRespDto = new CommonRespDto<String>();
+    	
+    			commonRespDto.setStatusCode(result);
+    			commonRespDto.setData("성공");
+    			Gson gson = new Gson();
+    			String respData = gson.toJson(commonRespDto);
+    		                                 
+    	
     		PrintWriter out = response.getWriter();
     		out.print(respData);
     		out.flush();
     		
-    		System.out.println(dto);
-    		System.out.println(data);
+    	
     	} else if(cmd.equals("updateForm")) {
     		//상세보기 데이터를 가져가야 한다.
     		//id도 받아와야 한다.

@@ -35,9 +35,30 @@
 				<div class="panel panel-info">
 					<div class="panel-heading m-2"><b>Comment</b></div>
 					<div class="panel-body">
-						<textarea class="form-control" placeholder="write a comment..." rows="2"></textarea>
-						<br>
-						<button type="button" class="btn btn-primary pull-right">댓글쓰기</button>
+					
+					<form action="/JspBlog/reply?cmd=save" method="post">
+							<input type="hidden" name="userId" value="${sessionScope.sessionUser.id}" />
+							<input type="hidden" name="boardId" value="${detailList.id}" />
+							<textarea name="content" id="reply__write__form" class="form-control" placeholder="write a comment..." rows="2"></textarea>
+							<br>
+
+							<button class="btn btn-primary pull-right">댓글쓰기</button>
+						</form>
+						<script>
+						
+						
+						/* function replySave(){
+							$.ajax({
+								type:"post",
+								url:"/JspBlog/reply?cmd=save",
+								data:
+							}).done(function(result){
+								
+							})
+						} */
+						
+						
+						</script>
 						<div class="clearfix"></div>
 						<hr />
 						<!-- 댓글 리스트 시작-->
@@ -48,9 +69,9 @@
 							<li class="media">	
 								<img src="https://bootdey.com/img/Content/user_1.jpg" class="img-circle">		
 								<div class="media-body">
-									<strong class="text-primary">guest1</strong>
+									<strong class="text-primary"></strong>
 									<p>
-									댓글...
+									${dto.content }
 									</p>
 								</div>
 								<div class="m-2">
@@ -73,22 +94,17 @@
      <script>
     function deleteById(boardId){
     	
-    	var data = {
-    			boardId : boardId
-    	}
-    	console.log(data);
-    	console.log(JSON.stringify(data));
+    	
+    	
     	
     	
     	
     	$.ajax({
     		type:"post",
-    		url:"/JspBlog/board?cmd=delete",
-    		data:JSON.stringify(data),
-    		contentType:"application/json; charset=utf-8",
+    		url:"/JspBlog/board?cmd=delete&id="+boardId,
     		dataType:"json"
     	}).done(function(result){
-    		if(result.msg=="ok"){
+    		if(result.statusCode==1){
     			alert("성공적으로 삭제하였습니다.");
     		location.href="index.jsp";	
     		} else {
