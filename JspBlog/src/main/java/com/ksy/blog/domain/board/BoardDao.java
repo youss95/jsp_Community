@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.ksy.blog.config.DBConnection;
 import com.ksy.blog.domain.board.dto.DetailRespDto;
+import com.ksy.blog.domain.board.dto.UpdateReqDto;
 import com.ksy.blog.domain.board.dto.WriteReqDto;
 import com.ksy.blog.domain.user.dto.JoinReqDto;
 
@@ -161,6 +162,25 @@ return -1;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
+			DBConnection.close(con, pstmt);
+		}
+		return -1;
+	}
+	//글 수정
+	public int update(UpdateReqDto dto) {
+		Connection con =DBConnection.getCon();
+		String sql ="update board set title=?, content=? where id=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setInt(3, dto.getId());
+			int result = pstmt.executeUpdate();
+			return result;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
 			DBConnection.close(con, pstmt);
 		}
 		return -1;

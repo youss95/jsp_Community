@@ -18,6 +18,7 @@ import com.ksy.blog.domain.board.Board;
 import com.ksy.blog.domain.board.dto.DeleteReqDto;
 import com.ksy.blog.domain.board.dto.DeleteRespDto;
 import com.ksy.blog.domain.board.dto.DetailRespDto;
+import com.ksy.blog.domain.board.dto.UpdateReqDto;
 import com.ksy.blog.domain.board.dto.WriteReqDto;
 import com.ksy.blog.domain.user.User;
 import com.ksy.blog.service.BoardService;
@@ -134,6 +135,38 @@ public class BoardController extends HttpServlet {
     		
     		System.out.println(dto);
     		System.out.println(data);
+    	} else if(cmd.equals("updateForm")) {
+    		//상세보기 데이터를 가져가야 한다.
+    		//id도 받아와야 한다.
+    		int id = Integer.parseInt(request.getParameter("id"));
+    		DetailRespDto updateList=boardService.상세보기(id);
+    		
+    		request.setAttribute("updateList", updateList);
+    		RequestDispatcher dis = request.getRequestDispatcher("board/updateForm.jsp");
+    		dis.forward(request, response);
+    		
+    	}else if(cmd.equals("update")) {
+    		int id = Integer.parseInt(request.getParameter("id"));
+    		String title = request.getParameter("title");
+    		String content = request.getParameter("content");
+    		
+    		UpdateReqDto dto = new UpdateReqDto();
+    		dto.setId(id);
+    		dto.setTitle(title);
+    		dto.setContent(content);
+    		
+//    		WriteReqDto dto = new WriteReqDto();
+//    		dto.setUserId(userId);
+//    		dto.setTitle(title);
+//    		dto.setContent(content);
+    		
+    		int result =  boardService.글수정(dto);
+    		if(result == 1) {
+    			//어떻게 하면 상세보기 코드를 다시 타게할까?
+    			response.sendRedirect("/JspBlog/board?cmd=detail&id="+id);
+    		} else {
+    			Script.back(response, "글 수정에 실패하였습니다.");
+    		}
     	}
 	}	
 }

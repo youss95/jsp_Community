@@ -6,36 +6,11 @@
     <!--작성자의 게시물에 접속하였을때만 삭제 버튼이 보인다.  -->
     <c:if test="${sessionScope.sessionUser.id == detailList.userId }">
     <button onclick="deleteById(${detailList.id})" class="btn btn-danger">삭제</button>
+    <a href="/JspBlog/board?cmd=updateForm&id=${detailList.id }" class="btn btn-warning">수정</a>
     </c:if>
     
     <!--script에 jsp코드가 들어가면 분리가 안된다.  -->
-    <script>
-    function deleteById(boardId){
-    	
-    	var data = {
-    			boardId : boardId
-    	}
-    	console.log(data);
-    	console.log(JSON.stringify(data));
-    	
-    	
-    	
-    	$.ajax({
-    		type:"post",
-    		url:"/JspBlog/board?cmd=delete",
-    		data:JSON.stringify(data),
-    		contentType:"application/json; charset=utf-8",
-    		dataType:"json"
-    	}).done(function(result){
-    		if(result.msg=="ok"){
-    			alert("성공적으로 삭제하였습니다.");
-    		location.href="index.jsp";	
-    		} else {
-    			alert("삭제에 실패");
-    		}
-    	});
-    }
-    </script>
+   
     
     
     <br/>
@@ -95,6 +70,32 @@
 	<!-- 댓글 박스 끝 -->
     
     </div>
-    
+     <script>
+    function deleteById(boardId){
+    	
+    	var data = {
+    			boardId : boardId
+    	}
+    	console.log(data);
+    	console.log(JSON.stringify(data));
+    	
+    	
+    	
+    	$.ajax({
+    		type:"post",
+    		url:"/JspBlog/board?cmd=delete",
+    		data:JSON.stringify(data),
+    		contentType:"application/json; charset=utf-8",
+    		dataType:"json"
+    	}).done(function(result){
+    		if(result.msg=="ok"){
+    			alert("성공적으로 삭제하였습니다.");
+    		location.href="index.jsp";	
+    		} else {
+    			alert("삭제에 실패");
+    		}
+    	});
+    }
+    </script>
     </body>
     </html>

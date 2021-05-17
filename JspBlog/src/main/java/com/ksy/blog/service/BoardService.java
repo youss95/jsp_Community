@@ -5,6 +5,7 @@ import java.util.List;
 import com.ksy.blog.domain.board.Board;
 import com.ksy.blog.domain.board.BoardDao;
 import com.ksy.blog.domain.board.dto.DetailRespDto;
+import com.ksy.blog.domain.board.dto.UpdateReqDto;
 import com.ksy.blog.domain.board.dto.WriteReqDto;
 
 public class BoardService {
@@ -45,6 +46,10 @@ public DetailRespDto 상세보기(int id){
 public int 글삭제(int id) {
 	
 	return boardDao.deleteById(id);
+}
+
+public int 글수정(UpdateReqDto dto) {
+	return boardDao.update(dto);
 }
 
 }
