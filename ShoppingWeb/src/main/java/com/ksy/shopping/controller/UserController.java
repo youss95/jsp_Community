@@ -46,7 +46,10 @@ public class UserController extends HttpServlet {
 			String user_id = request.getParameter("user_id");
 			String user_password = request.getParameter("user_password");
 			String user_email = request.getParameter("user_email");
-			String user_address = request.getParameter("user_address");
+			String address1 = request.getParameter("user_address");
+			String address2 = request.getParameter("user_addressDetail");
+			
+			String user_address = address1+" "+address2;
 			dto.setUser_id(user_id);
 			dto.setUser_password(user_password);
 			dto.setUser_email(user_email);
