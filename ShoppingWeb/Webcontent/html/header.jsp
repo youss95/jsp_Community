@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,12 +78,22 @@
 			</a>
 		</h1>
 		<ul class="utils">
-		<li><a href="#">로그인</a></li>
-		<li><a href="/ShoppingWeb/user?cmd=JoinForm">회원가입</a></li>
-			<li><a href="#">검색</a></li>
-			<li><a href="#">마이페이지</a></li>
-			<li><a href="#">위시리스트</a></li>
+		<c:choose>
+		<c:when test="${sessionScope.sessionUser != null }">
+		<li><a href="#">${sessionScope.sessionUser.user_id }님 안녕</a></li>
+		<li><a href="/ShoppingWeb/user?cmd=logout">로그아웃	</a></li>
+		<li><a href="/ShoppingWeb/user?cmd=MyForm">마이페이지</a></li>
+		<li><a href="#">위시리스트</a></li>
 			<li><a href="#">장바구니</a></li>
+		</c:when>
+		<c:otherwise>
+		<li><a href="/ShoppingWeb/user?cmd=LoginForm">로그인</a></li>
+		<li><a href="/ShoppingWeb/user?cmd=JoinForm">회원가입</a></li>
+		</c:otherwise>
+		</c:choose>
+			<li><a href="#">검색</a></li>
+			
+			
 		</ul>
 	</header>
     

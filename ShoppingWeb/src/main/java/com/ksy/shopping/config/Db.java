@@ -2,6 +2,7 @@ package com.ksy.shopping.config;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -34,6 +35,14 @@ public class Db {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+	}
+	public static void close(Connection con,ResultSet rs, PreparedStatement pstmt) {
+		try {
+			con.close();
+			pstmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

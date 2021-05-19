@@ -26,7 +26,7 @@ public class UserService {
 	
 	public User 로그인(LoginReqDto dto) {
 		
-		return null;
+		return userDao.login(dto);
 	}
 	
 	public int 아이디중복체크(String username) {

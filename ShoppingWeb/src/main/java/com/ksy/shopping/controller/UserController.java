@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ksy.shopping.domain.user.User;
 import com.ksy.shopping.domain.user.dto.JoinReqDto;
@@ -38,6 +39,14 @@ public class UserController extends HttpServlet {
 			dto.setUser_id(user_id);
 			dto.setUser_password(user_password);
 			User user = userService.로그인(dto);
+			//로그인 되었다면 user가 null이 아니다.
+			if(user!=null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("sessionUser", user);
+				Script.writeSuccess(response, "로그인에 성공하였습니다.");
+			} else {
+				Script.back(response, "로그인에 실패하였습니다.");
+			}
 		} else if(cmd.equals("JoinForm")) {
 			response.sendRedirect("user/JoinForm.jsp");
 		}else if(cmd.equals("join")) {
@@ -60,6 +69,11 @@ public class UserController extends HttpServlet {
 			} else {
 				Script.back(response, "회원가입 실패");
 			}
+		} else if(cmd.equals("logout")) {
+			//로그아웃은 세션 무효화
+			HttpSession session = request.getSession();
+			session.invalidate(); //세션 무효화
+			Script.writeSuccess(response, "로그아웃 되었습니다.");
 		}
 
 

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 import com.ksy.shopping.config.Db;
 import com.ksy.shopping.domain.user.dto.JoinReqDto;
+import com.ksy.shopping.domain.user.dto.LoginReqDto;
 
 public class UserDao {
 Connection con;
@@ -29,6 +30,32 @@ ResultSet rs;
 			 Db.close(con, pstmt);
 		 }
 		 return -1;
+	}
+	
+	//로그인
+	public User login(LoginReqDto dto) {
+		con=Db.getCon();
+		String sql ="select user_no,user_id,user_email,user_address from shopping_user where user_id=? and user_password=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getUser_id());
+			pstmt.setString(2, dto.getUser_password());
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				User user = User.builder()
+						.user_no(rs.getInt("user_no"))
+						.user_id(rs.getString("user_id"))
+						.user_email(rs.getString("user_email"))
+						.user_address(rs.getString("user_address"))
+						.build();
+				return user;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			Db.close(con, rs, pstmt);
+		}
+		return null;
 	}
 	
 	
