@@ -4,7 +4,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <br/><br/><br/><br/>
 <div class="container">
-<form action="/ShoppingWeb/user?cmd=join" method="post">
+<form action="/ShoppingWeb/user?cmd=mypage" method="post">
   <div class="form-group">
     <label for="id">아이디:</label> <input type="button" id="idcheck"  onclick="idCheck();" value="중복검사">
     <input type="text" class="form-control" placeholder="Enter id" id="user_id" name="user_id">

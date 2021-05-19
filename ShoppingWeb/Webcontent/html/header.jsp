@@ -23,7 +23,7 @@
 	<header>
 		<ul class="menu">
 			<li>
-				<a href="#">남성</a>
+				<a href="/ShoppingWeb/user?cmd=Mjacket">남성</a>
 				<ul class="menu_list">
 					<li><a href="#">자켓</a></li>
 					<li><a href="#">니트</a></li>
@@ -73,19 +73,26 @@
 			</li>
 		</ul>
 		<h1 class="logo">
-			<a href="#">
+			<a href="/ShoppingWeb/html/index.jsp">
 				<img src="../resources/images/logo.png" alt="프레디페리 로고 이미지">
 			</a>
 		</h1>
 		<ul class="utils">
 		<c:choose>
-		<c:when test="${sessionScope.sessionUser != null }">
-		<li><a href="#">${sessionScope.sessionUser.user_id }님 안녕</a></li>
+		<c:when test="${sessionScope.sessionUser != null&&sessionScope.sessionUser.userRole.equals('normal') }">
+		<li><a href="#">${sessionScope.sessionUser.user_id }님 안녕👋</a></li>
 		<li><a href="/ShoppingWeb/user?cmd=logout">로그아웃	</a></li>
 		<li><a href="/ShoppingWeb/user?cmd=MyForm">마이페이지</a></li>
-		<li><a href="#">위시리스트</a></li>
+		
 			<li><a href="#">장바구니</a></li>
 		</c:when>
+		
+		<c:when test="${sessionScope.sessionUser != null&&sessionScope.sessionUser.userRole.equals('admin') }">
+		<li><a href="#">관리자 계정입니다.</a></li>
+		<li><a href="/ShoppingWeb/user?cmd=UploadForm">상품등록</a></li>
+		<li><a href="/ShoppingWeb/user?cmd=logout">로그아웃	</a></li>
+		</c:when>
+		
 		<c:otherwise>
 		<li><a href="/ShoppingWeb/user?cmd=LoginForm">로그인</a></li>
 		<li><a href="/ShoppingWeb/user?cmd=JoinForm">회원가입</a></li>

@@ -35,7 +35,7 @@ ResultSet rs;
 	//로그인
 	public User login(LoginReqDto dto) {
 		con=Db.getCon();
-		String sql ="select user_no,user_id,user_email,user_address from shopping_user where user_id=? and user_password=?";
+		String sql ="select user_no,user_id,user_email,user_address,userRole from shopping_user where user_id=? and user_password=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getUser_id());
@@ -47,6 +47,7 @@ ResultSet rs;
 						.user_id(rs.getString("user_id"))
 						.user_email(rs.getString("user_email"))
 						.user_address(rs.getString("user_address"))
+						.userRole(rs.getString("userRole"))
 						.build();
 				return user;
 			}
