@@ -12,7 +12,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-	<link rel="stylesheet" href="style.css" type="text/css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/html/style.css" type="text/css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -23,7 +23,7 @@
 	<header>
 		<ul class="menu">
 			<li>
-				<a href="/ShoppingWeb/user?cmd=Mjacket">남성</a>
+				<a href="/ShoppingWeb/product?cmd=jacket">남성</a>
 				<ul class="menu_list">
 					<li><a href="#">자켓</a></li>
 					<li><a href="#">니트</a></li>
@@ -74,7 +74,7 @@
 		</ul>
 		<h1 class="logo">
 			<a href="/ShoppingWeb/html/index.jsp">
-				<img src="../resources/images/logo.png" alt="프레디페리 로고 이미지">
+				<img src="<%=request.getContextPath() %>/resources/images/logo.png" alt="프레디페리 로고 이미지">
 			</a>
 		</h1>
 		<ul class="utils">
@@ -89,7 +89,7 @@
 		
 		<c:when test="${sessionScope.sessionUser != null&&sessionScope.sessionUser.userRole.equals('admin') }">
 		<li><a href="#">관리자 계정입니다.</a></li>
-		<li><a href="/ShoppingWeb/user?cmd=UploadForm">상품등록</a></li>
+		<li><a href="/ShoppingWeb/product?cmd=UploadForm">상품등록</a></li>
 		<li><a href="/ShoppingWeb/user?cmd=logout">로그아웃	</a></li>
 		</c:when>
 		

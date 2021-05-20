@@ -4,7 +4,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <br/><br/><br/><br/>
 <div class="container">
-<form action="/ShoppingWeb/user?cmd=mypage" method="post">
+<form action="/ShoppingWeb/product?cmd=upload" method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="id">카테고리:</label> 
     <input type="text" class="form-control" placeholder="카테고리입력" id="product_category" name="product_category">
@@ -36,28 +36,17 @@
     <input type="text" class="form-control" placeholder="가격 입력" id="product_price" name="product_price">
   </div>
   
+  파일: <input type="file" name="file"><br>
+  
+
+  
   <br>
   <button type="submit" class="btn btn-primary">등록하기</button>
   <button type="reset" class="btn btn-primary">다시하기</button>
 </form>
 </div>
 
-<script>
-		
-		document.getElementById("search").onclick = function() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
 
-							var roadAddr = data.roadAddress; // 도로명 주소 변수
-
-							document.getElementById('sample4_postcode').value = data.zonecode;
-							document.getElementById("user_address").value = roadAddr;
-
-						}
-					}).open();
-		}
-	</script>
 
 </body>
 </html>

@@ -16,11 +16,13 @@ public class Product {
 
 	private int product_no;
 	private String product_category;
-	private int product_stock;
-	private String roduct_name;
-	private String roduct_color;
+	private String product_stock;
+	private String product_name;
+	private String product_color;
 	private String product_size;
-	private int product_price;
-	private Date createDate;
+	private String product_price;
+	private Date  product_createDate;
+	private String filename;
+	private String fileRealName;
 	
 }

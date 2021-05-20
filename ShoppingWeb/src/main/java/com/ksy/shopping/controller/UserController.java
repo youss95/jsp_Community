@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.ksy.shopping.domain.user.User;
 import com.ksy.shopping.domain.user.dto.JoinReqDto;
 import com.ksy.shopping.domain.user.dto.LoginReqDto;
+import com.ksy.shopping.service.ProductService;
 import com.ksy.shopping.service.UserService;
 import com.ksy.shopping.util.Script;
 
@@ -27,9 +28,10 @@ public class UserController extends HttpServlet {
 		reqpro(request,response);
 	}
 	UserService userService = new UserService();
+	
 	protected void reqpro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getParameter("cmd");
-		
+		//로그인
 		if(cmd.equals("LoginForm")) {
 			response.sendRedirect("user/LoginForm.jsp");
 		} else if(cmd.equals("login")) {
@@ -74,14 +76,6 @@ public class UserController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.invalidate(); //세션 무효화
 			Script.writeSuccess(response, "로그아웃 되었습니다.");
-		}else if(cmd.equals("Mjacket")) {
-			response.sendRedirect("product/Mjacket.jsp");
-		}else if(cmd.equals("jacket")){
-			
-		}else if(cmd.equals("UploadForm")) {
-			response.sendRedirect("product/UploadForm.jsp");
-		}else if(cmd.equals("upload")) {
-			
 		}
 
 

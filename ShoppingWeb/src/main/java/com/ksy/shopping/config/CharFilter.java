@@ -39,7 +39,7 @@ public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain
 		}
 		
 		String username = request.getParameter("username");
-		System.out.println("username:"+username);
+		
 		
 		chain.doFilter(request, response);
 	
