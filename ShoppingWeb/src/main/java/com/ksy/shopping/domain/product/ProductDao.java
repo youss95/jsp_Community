@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ksy.shopping.config.Db;
+import com.ksy.shopping.domain.product.dto.DetailReqDto;
 import com.ksy.shopping.domain.product.dto.UploadReqDto;
 
 public class ProductDao {
@@ -66,6 +67,33 @@ public class ProductDao {
 									list.add(product);
 			}
 			return list;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			Db.close(con, rs, pstmt);
+		}
+		return null;
+	}
+	
+	public DetailReqDto getDetail(int product_no) {
+		con = Db.getCon();
+		String sql ="select product_no,product_category,product_stock,product_name,product_color,product_size,product_price,filename  from shopping_product where product_no=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, product_no);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				DetailReqDto dto = new DetailReqDto();
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setProduct_category(rs.getString("product_category"));
+				dto.setProduct_stock(rs.getString("product_stock"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_color(rs.getString("product_color"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_price(rs.getString("product_price"));
+				dto.setFilename(rs.getString("filename"));
+				return dto;
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

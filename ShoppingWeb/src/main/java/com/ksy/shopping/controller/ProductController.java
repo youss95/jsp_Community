@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.catalina.core.ApplicationContext;
 
 import com.ksy.shopping.domain.product.Product;
+import com.ksy.shopping.domain.product.dto.DetailReqDto;
 import com.ksy.shopping.domain.product.dto.UploadReqDto;
 import com.ksy.shopping.domain.user.User;
 import com.ksy.shopping.service.ProductService;
@@ -93,7 +94,7 @@ try {
 			dto.setProduct_price(product_price);
 			dto.setFilename(filename);
 			dto.setFielRealName(fileRealName);
-			System.out.println("업로드"+dto);
+		
 			int result = productService.업로드(dto);
 			if(result==1) {
 				Script.writeSuccess(response, "성공");
@@ -103,6 +104,20 @@ try {
 }catch(Exception e) {
 	e.printStackTrace();
 }
+			
+		}else if(cmd.equals("detail")) {
+			int product_no = Integer.parseInt(request.getParameter("product_no"));
+			
+			DetailReqDto detailList = productService.상세상품(product_no);
+			System.out.println("디테일"+detailList);
+			if(detailList == null) {
+				Script.back(response, "정보를 가져오는데 실패하였습니다.");
+			}else {
+				request.setAttribute("detailList", detailList);
+				RequestDispatcher dis = request.getRequestDispatcher("product/ProductDetail.jsp");
+				dis.forward(request, response);
+				
+			}
 			
 		}
 	}

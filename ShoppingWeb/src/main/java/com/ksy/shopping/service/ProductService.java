@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ksy.shopping.domain.product.Product;
 import com.ksy.shopping.domain.product.ProductDao;
+import com.ksy.shopping.domain.product.dto.DetailReqDto;
 import com.ksy.shopping.domain.product.dto.UploadReqDto;
 
 public class ProductService {
@@ -23,6 +24,12 @@ public class ProductService {
 		
 		
 	 return productDao.showList();
+	}
+	
+	public DetailReqDto 상세상품(int product_no) {
+		
+		return productDao.getDetail(product_no);
+		
 	}
 	
 }
