@@ -3,12 +3,12 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@include file="../html/header.jsp" %>
     <!-- admin으로 수정하수 있어야 한다. -->
-   
+   <br><br><br><br>
 <div class="container">
   <div class="row">
     <div class="col">
   <c:forEach var="plist" items="${list}">
-   <br><br><br><br>
+   
   <div class="card" style="width:300px">
     <img class="card-img-top" src="<%=request.getContextPath() %>/upload/${plist.filename}"  alt="Card image" style="width:100%">
     <div class="card-body">
@@ -17,7 +17,7 @@
       <a href="/ShoppingWeb/product?cmd=detail&product_no=${plist.product_no }" class="btn btn-primary ">Detail</a>
     </div>
   </div>
- 
+ <br><br>
 </c:forEach>
 </div>
  </div>

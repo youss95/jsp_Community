@@ -16,4 +16,12 @@ public class CartService {
 		
 		return cartdao.shoppingCart(product_no,user_no);
 	}
+	
+	public List<CartReqDto> 장바구니목록(int user_no){
+		
+		
+		return cartdao.showCart(user_no);
+	}
+	
+	
 }

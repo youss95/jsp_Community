@@ -20,6 +20,7 @@
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    
 </head>
 
 <body>
@@ -87,7 +88,7 @@
 		<li><a href="/ShoppingWeb/user?cmd=logout">로그아웃	</a></li>
 		<li><a href="/ShoppingWeb/user?cmd=MyForm">마이페이지</a></li>
 		
-			<li><a href="#">장바구니</a></li>
+			<li><a href="/ShoppingWeb/cart?cmd=bascketForm&user_no=${sessionScope.sessionUser.user_no}">장바구니</a></li>
 		</c:when>
 		
 		<c:when test="${sessionScope.sessionUser != null&&sessionScope.sessionUser.userRole.equals('admin') }">

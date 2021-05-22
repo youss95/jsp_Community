@@ -12,7 +12,7 @@
     <div id="product_color">color: ${detailList.product_color } </div>
     <div id="product_size">size: ${detailList.product_size } </div>
 
-     
+     <!-- 로그인이 된 상태이고 user_no가 필요하다면 session이용 -->
     
     <button type="button" class="btn btn-info" onclick="location.href='/ShoppingWeb/product?cmd=jacket'">뒤로가기</button>
    
