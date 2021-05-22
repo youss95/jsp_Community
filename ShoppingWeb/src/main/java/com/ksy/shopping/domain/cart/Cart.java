@@ -18,6 +18,6 @@ public class Cart {
 	private int cart_no;
 	private int  user_no;
 	private int product_no;
-	private int cart_qty; //수량
+	private String cart_qty; //수량
 	
 }

@@ -74,7 +74,7 @@ public class ProductDao {
 		}
 		return null;
 	}
-	
+	//상세보기
 	public DetailReqDto getDetail(int product_no) {
 		con = Db.getCon();
 		String sql ="select product_no,product_category,product_stock,product_name,product_color,product_size,product_price,filename  from shopping_product where product_no=?";

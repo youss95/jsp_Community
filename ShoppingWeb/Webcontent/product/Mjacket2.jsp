@@ -13,7 +13,7 @@
     <div class="card-body">
       <h4 class="card-title">${plist.product_name}</h4>
       <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-      <a href="#" class="btn btn-primary stretched-link">${plist.product_size }</a>
+      <a href="#" class="btn btn-primary ">${plist.product_size }</a>
     </div>
   </div>
 
