@@ -1,6 +1,9 @@
 package com.ksy.shopping.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -76,7 +79,22 @@ public class UserController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.invalidate(); //세션 무효화
 			Script.writeSuccess(response, "로그아웃 되었습니다.");
+		} else if(cmd.equals("usernameCheck")) {
+			
+			BufferedReader br = request.getReader();  //넘어온 text읽기
+			String user_id = br.readLine(); 
+			System.out.println(user_id);
+			int result = userService.유저네임중복체크(user_id);  //db에 던지기
+			System.out.println(result);
+		    PrintWriter out = response.getWriter();
+			if(result == 1) {
+				out.print("ok");
+			} else {
+				out.print("fail");
+			}
+			out.flush();
 		}
+	
 
 
 	}

@@ -58,6 +58,23 @@ ResultSet rs;
 		}
 		return null;
 	}
-	
+	//아이디 중복체크
+	public int findByUsername(String user_id) {
+		con=Db.getCon();
+		String sql = "select user_id from shopping_user where user_id = ? ";
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				return 1;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			Db.close(con, rs, pstmt);
+		}
+		return -1;
+	}
 	
 }

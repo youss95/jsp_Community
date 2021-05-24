@@ -40,5 +40,9 @@ public class UserService {
 		return -1;
 	}
 
+	public int 유저네임중복체크(String user_id) {
+		
+		return userDao.findByUsername(user_id);
+	}
 	
 }
