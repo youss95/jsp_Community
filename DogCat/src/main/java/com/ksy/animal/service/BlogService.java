@@ -1,6 +1,9 @@
 package com.ksy.animal.service;
 
+import java.util.List;
+
 import com.ksy.animal.domain.blog.BlogDao;
+import com.ksy.animal.domain.blog.dto.ShowDto;
 import com.ksy.animal.domain.blog.dto.WriteDto;
 import com.ksy.animal.domain.user.User;
 import com.ksy.animal.domain.user.UserDao;
@@ -19,5 +22,10 @@ public class BlogService {
 		
 		return blogDao.writeArticle(dto);
 	}
+	
+	public List<ShowDto> 블로그목록보기(){
+		return blogDao.showBlog();
+	}
+	
 	
 }

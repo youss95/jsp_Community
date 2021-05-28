@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,18 +12,18 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
  
-    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/pet/css/animate.css">
     
-    <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../css/magnific-popup.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/pet/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/pet/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/pet/css/magnific-popup.css">
 
 
-    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="../css/jquery.timepicker.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/pet/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/pet/css/jquery.timepicker.css">
 
-    <link rel="stylesheet" href="../css/flaticon.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/pet/css/flaticon.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/pet/css/style.css">
     <style>
     #writeArti{
     float:right;
@@ -33,7 +34,7 @@
     
 <%@include file="../header.jsp" %>
 
- <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+ <section class="hero-wrap hero-wrap-2" style="background-image:url('<%=request.getContextPath() %>/pet/images/bg_2.jpg');;" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end">
@@ -48,20 +49,22 @@
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row d-flex">
+        <c:forEach var="show" items="${showblog}">
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('../images/image_1.jpg');">
+         <a href="blog-single.html" class="block-20 rounded" style="background-image: url('<%=request.getContextPath() %>/upload/${show.fileRealName}" ');">
               </a>
               <div class="text p-4">
               	<div class="meta mb-2">
-                  <div><a href="#">${blogList.bCreateDate }</a></div>
-                  <div><a href="#">유저네임</a></div>
+                  <div><a href="#">${show.user_id }</a></div>
+                  <div><a href="#">${show.title}</a></div>
                   <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
                 </div>
-                <h3 class="heading"><a href="#">${blogList.bTitle }</a></h3>
+                <h3 class="heading"><a href="#">${show.fileName}</a></h3>
               </div>
             </div>
           </div>
+       </c:forEach>
         </div>
         <c:if test="${sessionScope.sessionUser != null}">
         <div id="goWrite">
@@ -163,22 +166,22 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="../js/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/jquery.easing.1.3.js"></script>
-  <script src="../js/jquery.waypoints.min.js"></script>
-  <script src="../js/jquery.stellar.min.js"></script>
-  <script src="../js/jquery.animateNumber.min.js"></script>
-  <script src="../js/bootstrap-datepicker.js"></script>
-  <script src="../js/jquery.timepicker.min.js"></script>
-  <script src="../js/owl.carousel.min.js"></script>
-  <script src="../js/jquery.magnific-popup.min.js"></script>
-  <script src="../js/scrollax.min.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/jquery.min.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/popper.min.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/bootstrap.min.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/jquery.easing.1.3.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/jquery.waypoints.min.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/jquery.stellar.min.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/jquery.animateNumber.min.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/bootstrap-datepicker.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/jquery.timepicker.min.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/owl.carousel.min.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/jquery.magnific-popup.min.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="../js/google-map.js"></script>
-  <script src="../js/main.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/google-map.js"></script>
+  <script src="<%=request.getContextPath()%>/pet/js/main.js"></script>
 
 
   

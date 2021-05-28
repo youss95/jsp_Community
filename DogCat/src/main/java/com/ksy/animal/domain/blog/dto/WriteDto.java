@@ -1,5 +1,7 @@
 package com.ksy.animal.domain.blog.dto;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
@@ -10,5 +12,5 @@ private String bTitle;
 private String bContent;
 private String bfileName;
 private String bfileRealName;
-	
+private Date bCreateDate;	
 }

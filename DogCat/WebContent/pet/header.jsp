@@ -29,7 +29,7 @@
 		</div>
 		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	    	<a class="navbar-brand" href="../index.jsp"><span class="flaticon-pawprint-1 mr-2"></span>Pet sitting</a>
+	    	<a class="navbar-brand" href="/DogCat/pet/index.jsp"><span class="flaticon-pawprint-1 mr-2"></span>Pet sitting</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="fa fa-bars"></span> Menu
 	      </button>
@@ -40,8 +40,8 @@
 	        	<li class="nav-item"><a href="vet.html" class="nav-link">Veterinarian</a></li>
 	        	<li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
 	          <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
-	          <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-	          <li class="nav-item"><a href="/DogCat/blog?cmd=blogList" class="nav-link">Blog</a></li>
+	          <li class="nav-item"><a href="store/store.jsp" class="nav-link">스토어</a></li>
+	          <li class="nav-item"><a href="/DogCat/blog?cmd=blogList" class="nav-link">블로그</a></li>
 	          <c:choose>
 	          <c:when test="${sessionScope.sessionUser != null&&sessionScope.sessionUser.userRole.equals('admin') }">
 	            <li class="nav-item"><a href="/DogCat/user?cmd=JoinForm" class="nav-link">관리페이지</a></li>

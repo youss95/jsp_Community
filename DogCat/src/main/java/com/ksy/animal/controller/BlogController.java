@@ -2,7 +2,9 @@ package com.ksy.animal.controller;
 
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ksy.animal.domain.blog.dto.ShowDto;
 import com.ksy.animal.domain.blog.dto.WriteDto;
 import com.ksy.animal.domain.user.User;
 import com.ksy.animal.domain.user.dto.JoinDto;
@@ -38,12 +41,7 @@ public class BlogController extends HttpServlet {
 	protected void reqpro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getParameter("cmd");
 		
-		if(cmd.equals("blogList")) {
-			
-			
-			
-			response.sendRedirect("pet/blog/blog.jsp");
-		}else if(cmd.equals("WriteForm")) {
+		 if(cmd.equals("WriteForm")) {
 			response.sendRedirect("pet/blog/WriteForm.jsp");
 		}else if(cmd.equals("write")) {
 		
@@ -86,9 +84,18 @@ int maxSize = 1024*1024*100;
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-			
-			
+					
 		}else if(cmd.equals("blogList")) {
+		
+		
+			List<ShowDto> blist = blogService.블로그목록보기();
+			System.out.println("list"+blist);
+		
+			request.setAttribute("showblog",blist);
+			RequestDispatcher dis = request.getRequestDispatcher("pet/blog/blog.jsp");
+			dis.forward(request, response);
+			
+			
 			
 		}
 			
