@@ -21,5 +21,5 @@ public class Blog {
 	private String bfileName;
 	private String bfileRealName;
 	private int bHit;
-	private Date bCreateDate;
+	private Date createdate;
 }

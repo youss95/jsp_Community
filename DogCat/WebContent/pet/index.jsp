@@ -62,11 +62,12 @@
 	        	<li class="nav-item"><a href="vet.html" class="nav-link">Veterinarian</a></li>
 	        	<li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
 	          <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
-	          <li class="nav-item"><a href="store/store.jsp" class="nav-link">스토어</a></li>
+	          <li class="nav-item"><a href="/DogCat/product?cmd=productList" class="nav-link">스토어</a></li>
 	          <li class="nav-item"><a href="/DogCat/blog?cmd=blogList" class="nav-link">블로그</a></li>
-	          
+	         	
 	           <c:choose>
 	          <c:when test="${sessionScope.sessionUser != null&&sessionScope.sessionUser.userRole.equals('admin') }">
+	          	<li class="nav-item"><a href="/DogCat/product?cmd=uploadForm" class="nav-link">상품등록</a></li>
 	            <li class="nav-item"><a href="/DogCat/user?cmd=JoinForm" class="nav-link">관리페이지</a></li>
 	          <li class="nav-item"><a href="/DogCat/user?cmd=logout" class="nav-link">logout</a></li>
 	          </c:when>

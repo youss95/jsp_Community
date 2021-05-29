@@ -12,5 +12,5 @@ private String bTitle;
 private String bContent;
 private String bfileName;
 private String bfileRealName;
-private Date bCreateDate;	
+private Date createdate;	
 }

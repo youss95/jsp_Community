@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@page import="java.util.Date" %>
+  
  <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -50,6 +53,8 @@
       <div class="container">
         <div class="row d-flex">
         <c:forEach var="show" items="${showblog}">
+           
+    
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
          <a href="blog-single.html" class="block-20 rounded" style="background-image: url('<%=request.getContextPath() %>/upload/${show.fileRealName}" ');">
@@ -57,10 +62,10 @@
               <div class="text p-4">
               	<div class="meta mb-2">
                   <div><a href="#">${show.user_id }</a></div>
-                  <div><a href="#">${show.title}</a></div>
+                  <div><a href="#">${show.createdate}</a></div>
                   <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
                 </div>
-                <h3 class="heading"><a href="#">${show.fileName}</a></h3>
+                <h3 class="heading">${show.title}</a></h3>
               </div>
             </div>
           </div>

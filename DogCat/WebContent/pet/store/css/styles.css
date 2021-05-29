@@ -4218,11 +4218,11 @@ textarea.form-control-lg {
   color: rgba(0, 0, 0, 0.9);
 }
 
-.navbar-dark .navbar-brand {
-  color: #fff;
-}
+ .navbar-dark .navbar-brand {
+  color: black;
+} 
 .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
-  color: #fff;
+  color: black;
 }
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.55);

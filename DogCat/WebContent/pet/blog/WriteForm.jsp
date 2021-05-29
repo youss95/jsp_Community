@@ -49,7 +49,7 @@ float:right
    
    
  
-</div>
+
 
   <textarea id="editor" class="form-control" rows="4" id="content" name="bContent"></textarea>
  
@@ -62,6 +62,7 @@ float:right
    
   
     </form>
+    </div>
 <script>
   var quill = new Quill('#editor', {
     theme: 'snow'

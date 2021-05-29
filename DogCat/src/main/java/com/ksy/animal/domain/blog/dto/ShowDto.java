@@ -1,5 +1,9 @@
 package com.ksy.animal.domain.blog.dto;
 
+
+
+
+
 import java.sql.Date;
 
 import lombok.AllArgsConstructor;
@@ -17,5 +21,5 @@ public class ShowDto {
 	private String title;
 	private String fileRealName;
 	private String fileName;
-private Date CreateDate;
+	private Date createdate;
 }
