@@ -54,10 +54,10 @@
         <div class="row d-flex">
         <c:forEach var="show" items="${showblog}">
            
-    
+    <!--수정해야함 원래는 title이 아니라 blog 넘버를 쿼리스트링으로 보내야됨  -->
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-         <a href="blog-single.html" class="block-20 rounded" style="background-image: url('<%=request.getContextPath() %>/upload/${show.fileRealName}" ');">
+         <a href="/DogCat/blog?cmd=detail&title=${show.title}" class="block-20 rounded" style="background-image: url('<%=request.getContextPath() %>/upload/${show.fileRealName}" ');">
               </a>
               <div class="text p-4">
               	<div class="meta mb-2">

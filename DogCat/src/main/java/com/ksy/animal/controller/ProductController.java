@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ksy.animal.domain.product.Product;
+import com.ksy.animal.domain.product.dto.CartInsertDto;
 import com.ksy.animal.domain.product.dto.UploadDto;
 import com.ksy.animal.service.ProductService;
 import com.ksy.animal.util.Script;
@@ -95,6 +96,27 @@ reqpro(request,response);
 	}catch(Exception e) {
 		e.printStackTrace();
 	}
+		}else if(cmd.equals("detail")) {  //상품상세보기
+			int pNo = Integer.parseInt(request.getParameter("pNo"));
+			
+			Product product = productService.상품상세보기(pNo);
+			System.out.println("상품상세"+product);
+			
+			request.setAttribute("detail", product);
+			RequestDispatcher dis = request.getRequestDispatcher("pet/store/DetailProduct.jsp");
+			dis.forward(request, response);
+		}else if(cmd.equals("addCart")) {
+			int pNo = Integer.parseInt(request.getParameter("pNo"));
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+			
+			CartInsertDto dto = new CartInsertDto();
+			dto.setPNo(pNo);
+			dto.setUser_no(user_no);
+			
+			int result = productService.장바구니(dto);
+			if(result>0) {
+				Script.writeSuccess(response, "장바구님 담기 성공");
+			}
 		}
 	}
 }

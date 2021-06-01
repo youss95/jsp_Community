@@ -10,15 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.ksy.animal.domain.blog.Blog;
+import com.ksy.animal.domain.blog.dto.DetailDto;
 import com.ksy.animal.domain.blog.dto.ShowDto;
 import com.ksy.animal.domain.blog.dto.WriteDto;
-import com.ksy.animal.domain.user.User;
-import com.ksy.animal.domain.user.dto.JoinDto;
-import com.ksy.animal.domain.user.dto.LoginDto;
 import com.ksy.animal.service.BlogService;
-import com.ksy.animal.service.UserService;
 import com.ksy.animal.util.Script;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -94,9 +91,20 @@ int maxSize = 1024*1024*100;
 			request.setAttribute("showblog",blist);
 			RequestDispatcher dis = request.getRequestDispatcher("pet/blog/blog.jsp");
 			dis.forward(request, response);
+
+		} else if(cmd.equals("detail")) {
 			
+			Blog dto = new Blog();
+			String title = request.getParameter("title");
 			
-			
+			dto = blogService.글보기(title);
+			System.out.println("글보기dto"+dto);
+			if(dto != null) {
+				request.setAttribute("detailList", dto);
+				RequestDispatcher dis = request.getRequestDispatcher("pet/blog/BlogDetail.jsp");
+				dis.forward(request, response);
+			}
+			 
 		}
 			
 		

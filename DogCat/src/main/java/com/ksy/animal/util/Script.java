@@ -35,6 +35,34 @@ public class Script {
 		}
 	}
 	
+	public static void ReplyWriteSuccess(HttpServletResponse response, String msg) {
+		response.setCharacterEncoding("UTF-8");
+		try {
+			PrintWriter out = response.getWriter();
+			out.print("<script>");
+			out.print("alert('" + msg + "');");
+			out.print("window.location.href='pet/blog/BlogDetail.jsp';");
+			out.print("</script>");
+			out.flush();
+		}  catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void IfNotLogin(HttpServletResponse response, String msg) {
+		response.setCharacterEncoding("UTF-8");
+		try {
+			PrintWriter out = response.getWriter();
+			out.print("<script>");
+			out.print("alert('" + msg + "');");
+			out.print("window.location.href='pet/user/LoginForm.jsp';");
+			out.print("</script>");
+			out.flush();
+		}  catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void loginSuccessAtBlog(HttpServletResponse response, String msg) {
 		response.setCharacterEncoding("UTF-8");
 		try {

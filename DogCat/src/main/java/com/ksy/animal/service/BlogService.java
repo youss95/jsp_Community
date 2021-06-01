@@ -2,7 +2,9 @@ package com.ksy.animal.service;
 
 import java.util.List;
 
+import com.ksy.animal.domain.blog.Blog;
 import com.ksy.animal.domain.blog.BlogDao;
+import com.ksy.animal.domain.blog.dto.DetailDto;
 import com.ksy.animal.domain.blog.dto.ShowDto;
 import com.ksy.animal.domain.blog.dto.WriteDto;
 import com.ksy.animal.domain.user.User;
@@ -27,5 +29,13 @@ public class BlogService {
 		return blogDao.showBlog();
 	}
 	
+	
+	public Blog 글보기(String title) {
+		
+		int result = blogDao.조회수(title);
+		if(result>0)
+		return blogDao.showArticle(title);
+		return null;
+	}
 	
 }

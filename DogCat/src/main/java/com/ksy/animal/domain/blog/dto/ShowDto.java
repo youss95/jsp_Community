@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ShowDto {
-
+	private int user_no;
 	private String user_id;
 	private String title;
 	private String fileRealName;

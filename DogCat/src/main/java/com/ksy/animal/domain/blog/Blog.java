@@ -14,12 +14,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Blog {
 
-	private int bNo;
+	private int blognum;
 	private int user_no;
-	private String bTitle;
-	private String bContent;
+	private String title;
+	private String content;
 	private String bfileName;
 	private String bfileRealName;
-	private int bHit;
+	private int hit;
 	private Date createdate;
 }
